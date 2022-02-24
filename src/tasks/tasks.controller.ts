@@ -20,6 +20,7 @@ import { TaskStatus } from './task.status.enum';
 import { TasksService } from './tasks.service';
 import { Logger } from '@nestjs/common';
 
+
 @Controller('tasks')
 @UseGuards(AuthGuard())
 export class TasksController {
@@ -32,11 +33,11 @@ export class TasksController {
     @GetUser() user: User,
   ): Promise<Task[]> {
     this.logger.verbose(`User "${user.username}" retrieving all tasks`);
-    return this.tasksService.getTasks(filterDto,user);
+    return this.tasksService.getTasks(filterDto, user);
   }
 
   @Get('/:id')
-  getTaskById(@Param('id') id: string, @GetUser() user: User,): Promise<Task> {
+  getTaskById(@Param('id') id: string, @GetUser() user: User): Promise<Task> {
     return this.tasksService.getTaskById(id, user);
   }
 
@@ -49,7 +50,7 @@ export class TasksController {
   }
 
   @Delete('/:id')
-  deleteTask(@Param('id') id: string, @GetUser() user: User,): Promise<void> {
+  deleteTask(@Param('id') id: string, @GetUser() user: User): Promise<void> {
     return this.tasksService.deleteTask(id, user);
   }
 
